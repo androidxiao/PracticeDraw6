@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Button;
@@ -19,8 +20,10 @@ import static android.os.Build.VERSION.SDK_INT;
 import static com.hencoder.hencoderpracticedraw6.Utils.dpToPixel;
 
 public class Practice01Translation extends RelativeLayout {
+    public static final String TAG = "ez";
     Button animateBt;
     ImageView imageView;
+    int count=1;
 
     public Practice01Translation(Context context) {
         super(context);
@@ -44,11 +47,29 @@ public class Practice01Translation extends RelativeLayout {
             // 给音乐图标加上合适的阴影
             imageView.setOutlineProvider(new MusicOutlineProvider());
         }
-
         animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
+                Log.d(TAG, "aaaaaa: ---->"+count);
                 // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+                switch (count) {
+                    case 1:
+                        imageView.setTranslationX(150);
+                        break;
+                    case 2:
+                        imageView.setTranslationX(0);
+                        break;
+                    case 3:
+                        imageView.setTranslationY(150);
+                        break;
+                    case 4:
+                        imageView.setTranslationY(0);
+                        break;
+                }
+                count++;
+                if (count == 5) {
+                    count=1;
+                }
             }
         });
     }
